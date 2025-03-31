@@ -41,6 +41,15 @@ const Hero = () => {
 
       {/* Content */}
       <div className="relative z-10 container mx-auto px-4 pt-36 pb-24 md:pt-48 md:pb-32 flex flex-col items-center justify-center text-center">
+        {/* Amorgos Island Taxi Image */}
+        <div className="mb-8 max-w-xs md:max-w-sm animate-float">
+          <img 
+            src="/lovable-uploads/taxi-amorgos.jpg" 
+            alt="Amorgos Island Taxi" 
+            className="rounded-xl shadow-2xl border-4 border-taxi/30 transform rotate-2 hover:rotate-0 transition-transform duration-500"
+          />
+        </div>
+        
         <div className="max-w-4xl mx-auto backdrop-blur-sm bg-black/10 p-8 rounded-2xl border border-white/10">
           <h1 className="text-4xl md:text-6xl lg:text-7xl font-extrabold text-white mb-6 drop-shadow-lg animate-slide-in">
             Discover <span className="bg-clip-text text-transparent bg-gradient-to-r from-taxi to-taxi-light">Amorgos Island</span> <br/>
