@@ -1,41 +1,31 @@
-
 import React, { useEffect, useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Car, Calendar, Clock, MapPin, Star, ChevronDown } from "lucide-react";
-import { 
-  Carousel,
-  CarouselContent,
-  CarouselItem,
-  CarouselPrevious,
-  CarouselNext
-} from "@/components/ui/carousel";
-
+import { Carousel, CarouselContent, CarouselItem, CarouselPrevious, CarouselNext } from "@/components/ui/carousel";
 const Hero = () => {
   const [currentSlide, setCurrentSlide] = useState(0);
   const [autoplayInterval, setAutoplayInterval] = useState<NodeJS.Timeout | null>(null);
-
-  const backgroundImages = [
-    "/lovable-uploads/35266cbe-3406-4a67-839a-d5655b86bfdd.png",  // Helicopter and taxi image
-    "/lovable-uploads/71adb121-c781-46e9-9c84-2b09ca3b45ed.png",  // Yacht and taxi image
-    "/lovable-uploads/169ba8ae-3c6a-4ff1-9bfb-6948a45db348.png",  // Two taxis side by side
-    "/lovable-uploads/c382fb30-7129-4004-a2ed-c54a95a83927.png",  // Taxi at sunset
+  const backgroundImages = ["/lovable-uploads/35266cbe-3406-4a67-839a-d5655b86bfdd.png",
+  // Helicopter and taxi image
+  "/lovable-uploads/71adb121-c781-46e9-9c84-2b09ca3b45ed.png",
+  // Yacht and taxi image
+  "/lovable-uploads/169ba8ae-3c6a-4ff1-9bfb-6948a45db348.png",
+  // Two taxis side by side
+  "/lovable-uploads/c382fb30-7129-4004-a2ed-c54a95a83927.png" // Taxi at sunset
   ];
-
   useEffect(() => {
     // Set up autoplay for the carousel
     const interval = setInterval(() => {
-      setCurrentSlide((prev) => (prev === backgroundImages.length - 1 ? 0 : prev + 1));
+      setCurrentSlide(prev => prev === backgroundImages.length - 1 ? 0 : prev + 1);
     }, 5000); // Change slide every 5 seconds
-    
+
     setAutoplayInterval(interval);
-    
     return () => {
       if (autoplayInterval) {
         clearInterval(autoplayInterval);
       }
     };
   }, [autoplayInterval, backgroundImages.length]);
-
   const scrollToNextSection = () => {
     const servicesSection = document.getElementById('services');
     if (servicesSection) {
@@ -44,30 +34,20 @@ const Hero = () => {
       });
     }
   };
-
-  return (
-    <section className="relative min-h-screen overflow-hidden">
+  return <section className="relative min-h-screen overflow-hidden">
       {/* Background Carousel */}
       <div className="absolute inset-0 w-full h-full z-0">
-        <Carousel 
-          className="w-full h-full" 
-          opts={{ 
-            loop: true,
-            skipSnaps: true,
-          }}
-        >
+        <Carousel className="w-full h-full" opts={{
+        loop: true,
+        skipSnaps: true
+      }}>
           <CarouselContent className="h-full">
-            {backgroundImages.map((image, index) => (
-              <CarouselItem key={index} className="h-full">
-                <div 
-                  className="w-full h-full bg-cover bg-center transition-all duration-1000 ease-in-out transform scale-105"
-                  style={{ 
-                    backgroundImage: `url(${image})`,
-                    opacity: currentSlide === index ? 1 : 0
-                  }}
-                />
-              </CarouselItem>
-            ))}
+            {backgroundImages.map((image, index) => <CarouselItem key={index} className="h-full">
+                <div className="w-full h-full bg-cover bg-center transition-all duration-1000 ease-in-out transform scale-105" style={{
+              backgroundImage: `url(${image})`,
+              opacity: currentSlide === index ? 1 : 0
+            }} />
+              </CarouselItem>)}
           </CarouselContent>
         </Carousel>
       </div>
@@ -83,20 +63,20 @@ const Hero = () => {
       {/* Glowing particles effect */}
       <div className="absolute inset-0 z-15 opacity-60">
         <div className="absolute top-1/4 left-1/4 h-2 w-2 rounded-full bg-white animate-pulse" style={{
-          animationDelay: "0.5s"
-        }}></div>
+        animationDelay: "0.5s"
+      }}></div>
         <div className="absolute top-1/3 left-1/2 h-3 w-3 rounded-full bg-taxi animate-pulse" style={{
-          animationDelay: "1.2s"
-        }}></div>
+        animationDelay: "1.2s"
+      }}></div>
         <div className="absolute top-2/3 left-1/4 h-2 w-2 rounded-full bg-white animate-pulse" style={{
-          animationDelay: "2.1s"
-        }}></div>
+        animationDelay: "2.1s"
+      }}></div>
         <div className="absolute top-1/5 right-1/3 h-2 w-2 rounded-full bg-taxi animate-pulse" style={{
-          animationDelay: "0.7s"
-        }}></div>
+        animationDelay: "0.7s"
+      }}></div>
         <div className="absolute bottom-1/4 right-1/4 h-3 w-3 rounded-full bg-white animate-pulse" style={{
-          animationDelay: "1.5s"
-        }}></div>
+        animationDelay: "1.5s"
+      }}></div>
       </div>
 
       {/* Content */}
@@ -116,12 +96,14 @@ const Hero = () => {
         <div className="mb-8 flex flex-col md:flex-row gap-6 justify-center items-center">
           {/* First Taxi Image */}
           <div className="max-w-xs md:max-w-sm animate-float">
-            <img alt="Amorgos Island Taxi" src="/lovable-uploads/653c472b-f84f-4f6e-b08b-1136e4cee1a5.jpg" className="rounded-xl shadow-2xl border-4 border-taxi/30 transform rotate-2 hover:rotate-0 transition-transform duration-500 object-contain" />
+            
           </div>
           
           {/* Duplicated Taxi Image */}
-          <div className="max-w-xs md:max-w-sm animate-float" style={{ animationDelay: "0.3s" }}>
-            <img alt="Amorgos Island Taxi" src="/lovable-uploads/653c472b-f84f-4f6e-b08b-1136e4cee1a5.jpg" className="rounded-xl shadow-2xl border-4 border-taxi/30 transform -rotate-2 hover:rotate-0 transition-transform duration-500 object-contain" />
+          <div className="max-w-xs md:max-w-sm animate-float" style={{
+          animationDelay: "0.3s"
+        }}>
+            
           </div>
         </div>
         
@@ -158,8 +140,8 @@ const Hero = () => {
           </div>
           
           <div className="glass-card animate-float hover:scale-105 transition-transform duration-300" style={{
-            animationDelay: "0.2s"
-          }}>
+          animationDelay: "0.2s"
+        }}>
             <div className="feature-icon-wrapper">
               <Clock className="h-6 w-6 text-taxi-contrast" />
             </div>
@@ -168,8 +150,8 @@ const Hero = () => {
           </div>
           
           <div className="glass-card animate-float hover:scale-105 transition-transform duration-300" style={{
-            animationDelay: "0.4s"
-          }}>
+          animationDelay: "0.4s"
+        }}>
             <div className="feature-icon-wrapper">
               <MapPin className="h-6 w-6 text-taxi-contrast" />
             </div>
@@ -180,16 +162,7 @@ const Hero = () => {
         
         {/* Carousel navigation dots */}
         <div className="absolute bottom-24 left-1/2 transform -translate-x-1/2 flex space-x-2 z-30">
-          {backgroundImages.map((_, index) => (
-            <button
-              key={index}
-              onClick={() => setCurrentSlide(index)}
-              className={`w-3 h-3 rounded-full transition-all duration-300 ${
-                currentSlide === index ? 'bg-taxi scale-125' : 'bg-white/50 hover:bg-white/80'
-              }`}
-              aria-label={`Go to slide ${index + 1}`}
-            />
-          ))}
+          {backgroundImages.map((_, index) => <button key={index} onClick={() => setCurrentSlide(index)} className={`w-3 h-3 rounded-full transition-all duration-300 ${currentSlide === index ? 'bg-taxi scale-125' : 'bg-white/50 hover:bg-white/80'}`} aria-label={`Go to slide ${index + 1}`} />)}
         </div>
         
         {/* Scroll down indicator */}
@@ -201,8 +174,6 @@ const Hero = () => {
       
       {/* Diagonal clip bottom */}
       <div className="absolute bottom-0 left-0 right-0 h-24 bg-background clip-path-diagonal z-20" />
-    </section>
-  );
+    </section>;
 };
-
 export default Hero;
