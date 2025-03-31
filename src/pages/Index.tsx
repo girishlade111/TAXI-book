@@ -8,7 +8,7 @@ import Pricing from "@/components/Pricing";
 import BookingForm from "@/components/BookingForm";
 import Contact from "@/components/Contact";
 import Footer from "@/components/Footer";
-import { CreditCard } from "lucide-react";
+import { CreditCard, ShieldCheck, LockKeyhole } from "lucide-react";
 
 const Index = () => {
   return (
@@ -16,10 +16,20 @@ const Index = () => {
       <Header />
       <main>
         <Hero />
-        <div className="bg-muted py-2 px-4">
-          <div className="container mx-auto flex items-center justify-center text-sm">
-            <CreditCard className="h-4 w-4 mr-2 text-muted-foreground" />
-            <p className="text-muted-foreground">We accept secure online payments through Cardlink</p>
+        <div className="bg-muted py-4 px-4">
+          <div className="container mx-auto flex flex-col sm:flex-row items-center justify-center gap-4 sm:gap-8 text-sm">
+            <div className="flex items-center">
+              <CreditCard className="h-4 w-4 mr-2 text-taxi" />
+              <p>Secure online payments</p>
+            </div>
+            <div className="flex items-center">
+              <ShieldCheck className="h-4 w-4 mr-2 text-taxi" />
+              <p>Encrypted transactions</p>
+            </div>
+            <div className="flex items-center">
+              <LockKeyhole className="h-4 w-4 mr-2 text-taxi" />
+              <p>Protected by Cardlink</p>
+            </div>
           </div>
         </div>
         <Services />
