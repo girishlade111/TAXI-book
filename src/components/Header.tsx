@@ -18,7 +18,7 @@ const Header = () => {
           <Car className="h-8 w-8 text-taxi" />
           <div>
             <h1 className="text-xl font-bold text-yellow-300">TAXI AMORGOS </h1>
-            <p className="text-xs text-muted-foreground">By Lyviakis</p>
+            <p className="text-muted-foreground text-base">By Lyviakis</p>
           </div>
         </div>
 
