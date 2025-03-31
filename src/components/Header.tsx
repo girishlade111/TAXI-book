@@ -15,7 +15,7 @@ const Header = () => {
   return <header className={cn("fixed top-0 left-0 right-0 z-50 transition-all duration-300", isScrolled ? "bg-white/90 backdrop-blur-md shadow-md py-2" : "bg-transparent py-4")}>
       <div className="container mx-auto px-4 flex items-center justify-between">
         <div className="flex items-center space-x-2">
-          <Car className="h-8 w-8 text-taxi" />
+          
           <div>
             <h1 className="text-xl font-bold text-yellow-300">TAXI AMORGOS </h1>
             <p className="text-muted-foreground text-base">By Lyviakis</p>
