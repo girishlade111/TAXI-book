@@ -1,7 +1,5 @@
-
 import React from "react";
 import { Car, Phone, Mail, MapPin, ArrowUp } from "lucide-react";
-
 const Footer = () => {
   const scrollToTop = () => {
     window.scrollTo({
@@ -9,16 +7,14 @@ const Footer = () => {
       behavior: "smooth"
     });
   };
-
-  return (
-    <footer className="bg-gray-900 text-white">
+  return <footer className="bg-gray-900 text-white">
       <div className="container mx-auto px-4 py-12">
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-8">
           <div>
             <div className="flex items-center space-x-2 mb-4">
               <Car className="h-8 w-8 text-taxi" />
               <div>
-                <h2 className="text-xl font-bold">AMORGOS TRANSPORT</h2>
+                <h2 className="text-xl font-bold">TAXI AMORGOS</h2>
                 <p className="text-xs text-gray-400">Premium Taxi Service</p>
               </div>
             </div>
@@ -92,17 +88,11 @@ const Footer = () => {
           <p className="text-gray-400 text-sm mb-4 md:mb-0">
             &copy; {new Date().getFullYear()} Amorgos Transport. All rights reserved.
           </p>
-          <button 
-            onClick={scrollToTop}
-            className="bg-gray-800 hover:bg-gray-700 text-white p-3 rounded-full transition-colors"
-            aria-label="Scroll to top"
-          >
+          <button onClick={scrollToTop} className="bg-gray-800 hover:bg-gray-700 text-white p-3 rounded-full transition-colors" aria-label="Scroll to top">
             <ArrowUp className="h-5 w-5" />
           </button>
         </div>
       </div>
-    </footer>
-  );
+    </footer>;
 };
-
 export default Footer;
