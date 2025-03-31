@@ -1,23 +1,7 @@
 
 import React from "react";
 import { Car, ArrowRight } from "lucide-react";
-
-// Define price list from the given data
-const priceList = [
-  { from: "Aegiali", to: "Monastery", price: 25 },
-  { from: "Aegiali", to: "Katapola", price: 30 },
-  { from: "Aegiali", to: "Chora", price: 22 },
-  { from: "Aegiali", to: "Langada", price: 8 },
-  { from: "Aegiali", to: "Tholaria", price: 8 },
-  { from: "Aegiali", to: "Agios Pavlos", price: 10 },
-  { from: "Aegiali", to: "Kalotaritissa", price: 50 },
-  { from: "Aegiali", to: "Arkesini", price: 40 },
-  { from: "Katapola", to: "Chora", price: 10 },
-  { from: "Katapola", to: "Agia Anna", price: 14 },
-  { from: "Katapola", to: "Ag. Paraskevi", price: 30 },
-  { from: "Katapola", to: "Kalotaritissa", price: 33 },
-  { from: "Katapola", to: "Monastery", price: 12 }
-];
+import { priceList, minimumCharge } from "@/utils/pricingData";
 
 const Pricing = () => {
   return (
@@ -27,7 +11,7 @@ const Pricing = () => {
           <h2 className="text-3xl md:text-4xl font-bold mb-4">Transparent Pricing</h2>
           <p className="text-lg text-muted-foreground">
             Fixed fares for your peace of mind. Our prices are valid for taxis or vans of up to 4 persons.
-            Minimum charge: <span className="font-semibold">€6</span>
+            Minimum charge: <span className="font-semibold">€{minimumCharge}</span>
           </p>
         </div>
         
@@ -72,7 +56,7 @@ const Pricing = () => {
               </li>
               <li className="flex items-start">
                 <span className="text-taxi mr-2">•</span>
-                <span>Minimum charge: €6</span>
+                <span>Minimum charge: €{minimumCharge}</span>
               </li>
               <li className="flex items-start">
                 <span className="text-taxi mr-2">•</span>

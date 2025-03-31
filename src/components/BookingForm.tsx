@@ -1,4 +1,5 @@
-import React, { useState } from "react";
+
+import React, { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
@@ -12,20 +13,21 @@ import { cn } from "@/lib/utils";
 import { Calendar as CalendarIcon, Clock, CreditCard, Car, Users, Info, AlertCircle } from "lucide-react";
 import { toast } from "sonner";
 import PaymentIntegration from "./PaymentIntegration";
+import { priceList, findPrice, minimumCharge } from "@/utils/pricingData";
 
-const locations = [
-  "Aegiali",
-  "Monastery",
-  "Katapola",
-  "Chora",
-  "Langada",
-  "Tholaria",
-  "Agios Pavlos",
-  "Kalotaritissa",
-  "Arkesini",
-  "Agia Anna",
-  "Ag. Paraskevi"
-];
+// Extract locations from price list to avoid duplication
+const getUniqueLocations = () => {
+  const locations = new Set<string>();
+  
+  priceList.forEach(route => {
+    locations.add(route.from);
+    locations.add(route.to);
+  });
+  
+  return Array.from(locations).sort();
+};
+
+const locations = getUniqueLocations();
 
 const BookingForm = () => {
   const [date, setDate] = useState<Date | undefined>(undefined);
@@ -42,7 +44,8 @@ const BookingForm = () => {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [showPayment, setShowPayment] = useState(false);
   const [bookingReference, setBookingReference] = useState("");
-  const [estimatedPrice, setEstimatedPrice] = useState(0);
+  const [estimatedPrice, setEstimatedPrice] = useState<number | null>(null);
+  const [priceCalculated, setPriceCalculated] = useState(false);
 
   // Create date objects for validation
   const today = new Date();
@@ -65,19 +68,31 @@ const BookingForm = () => {
     setFormData(prev => ({ ...prev, [name]: value }));
   };
 
+  // Calculate price when pickup or destination changes
+  useEffect(() => {
+    if (formData.pickup && formData.destination) {
+      // Only calculate if both pickup and destination are selected
+      const price = findPrice(formData.pickup, formData.destination);
+      
+      if (price !== null) {
+        setEstimatedPrice(price);
+        setPriceCalculated(true);
+      } else {
+        // If no direct route found, show minimum charge
+        setEstimatedPrice(minimumCharge);
+        setPriceCalculated(false);
+        toast.info("No direct price available for this route. Minimum charge applied.", {
+          icon: <Info className="h-4 w-4" />,
+        });
+      }
+    } else {
+      setEstimatedPrice(null);
+      setPriceCalculated(false);
+    }
+  }, [formData.pickup, formData.destination]);
+
   const handleSelectChange = (name: string, value: string) => {
     setFormData(prev => ({ ...prev, [name]: value }));
-    
-    // If both pickup and destination are selected, calculate an estimated price
-    if (name === "pickup" || name === "destination") {
-      if (formData.pickup && formData.destination) {
-        // This is a simplified pricing model for demo purposes
-        // In a real app, you would have proper distance/zone-based pricing
-        const basePrice = 20;
-        const randomFactor = Math.floor(Math.random() * 15) + 5; // Random price between 5-20€
-        setEstimatedPrice(basePrice + randomFactor);
-      }
-    }
   };
 
   const handleRadioChange = (value: string) => {
@@ -149,9 +164,11 @@ const BookingForm = () => {
       notes: ""
     });
     setDate(undefined);
-    setEstimatedPrice(0);
+    setEstimatedPrice(null);
+    setPriceCalculated(false);
   };
 
+  // Payment screen rendering
   if (showPayment) {
     return (
       <section id="booking" className="py-20 px-4 bg-background">
@@ -164,7 +181,7 @@ const BookingForm = () => {
           </div>
           
           <PaymentIntegration 
-            amount={estimatedPrice}
+            amount={estimatedPrice || minimumCharge}
             bookingReference={bookingReference}
             onSuccess={handlePaymentSuccess}
             onCancel={handlePaymentCancel}
@@ -374,14 +391,16 @@ const BookingForm = () => {
                   </div>
                 </div>
                 
-                {estimatedPrice > 0 && (
-                  <div className="bg-muted/50 p-4 rounded-md">
+                {estimatedPrice !== null && (
+                  <div className={`${priceCalculated ? 'bg-taxi/10' : 'bg-muted/50'} p-4 rounded-md border ${priceCalculated ? 'border-taxi/20' : 'border-muted'}`}>
                     <div className="flex justify-between items-center">
-                      <span className="font-medium">Estimated Price:</span>
+                      <span className="font-medium">{priceCalculated ? 'Fixed Price:' : 'Estimated Price:'}</span>
                       <span className="text-xl font-bold text-taxi">€{estimatedPrice.toFixed(2)}</span>
                     </div>
                     <p className="text-xs text-muted-foreground mt-1">
-                      This is an estimated price. The final price may vary based on waiting time or additional services.
+                      {priceCalculated 
+                        ? "This is a fixed price based on our official pricing." 
+                        : "This is an estimated price. The final price may vary based on waiting time or additional services."}
                     </p>
                   </div>
                 )}
