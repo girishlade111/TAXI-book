@@ -16,8 +16,10 @@ const Hero = () => {
     // Two taxis side by side
     "/lovable-uploads/c382fb30-7129-4004-a2ed-c54a95a83927.png", 
     // Taxi at sunset
-    "/lovable-uploads/d9dc9629-95c4-4a3e-a0f8-b3892180343f.png"
+    "/lovable-uploads/d9dc9629-95c4-4a3e-a0f8-b3892180343f.png",
     // New image with two taxis by the sea
+    "/lovable-uploads/3f9e2210-7e6a-4a2f-b1fb-8f5043432703.png"
+    // VIP Transfer van by yacht
   ];
   
   useEffect(() => {
