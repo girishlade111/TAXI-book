@@ -1,3 +1,4 @@
+
 import React from "react";
 import { Button } from "@/components/ui/button";
 import { Car, Calendar, Clock, MapPin, Star, ChevronDown } from "lucide-react";
@@ -46,9 +47,17 @@ const Hero = () => {
 
       {/* Content */}
       <div className="relative z-10 container mx-auto px-4 pt-36 pb-24 md:pt-48 md:pb-32 flex flex-col items-center justify-center text-center">
-        {/* Amorgos Island Taxi Image */}
-        <div className="mb-8 max-w-xs md:max-w-sm animate-float">
-          <img alt="Amorgos Island Taxi" src="/lovable-uploads/653c472b-f84f-4f6e-b08b-1136e4cee1a5.jpg" className="rounded-xl shadow-2xl border-4 border-taxi/30 transform rotate-2 hover:rotate-0 transition-transform duration-500 object-contain" />
+        {/* Amorgos Island Taxi Images - Now Two Side by Side */}
+        <div className="mb-8 flex flex-col md:flex-row gap-6 justify-center items-center">
+          {/* First Taxi Image */}
+          <div className="max-w-xs md:max-w-sm animate-float">
+            <img alt="Amorgos Island Taxi" src="/lovable-uploads/653c472b-f84f-4f6e-b08b-1136e4cee1a5.jpg" className="rounded-xl shadow-2xl border-4 border-taxi/30 transform rotate-2 hover:rotate-0 transition-transform duration-500 object-contain" />
+          </div>
+          
+          {/* Duplicated Taxi Image */}
+          <div className="max-w-xs md:max-w-sm animate-float" style={{ animationDelay: "0.3s" }}>
+            <img alt="Amorgos Island Taxi" src="/lovable-uploads/653c472b-f84f-4f6e-b08b-1136e4cee1a5.jpg" className="rounded-xl shadow-2xl border-4 border-taxi/30 transform rotate-2 hover:rotate-0 transition-transform duration-500 object-contain" />
+          </div>
         </div>
         
         <div className="max-w-4xl mx-auto backdrop-blur-sm bg-black/10 p-8 rounded-2xl border border-white/10">
