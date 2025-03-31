@@ -15,7 +15,7 @@ const Footer = () => {
               <Car className="h-8 w-8 text-taxi" />
               <div>
                 <h2 className="text-xl font-bold">TAXI AMORGOS</h2>
-                <p className="text-xs text-gray-400">Premium Taxi Service</p>
+                <p className="text-xs text-gray-400">By Lyviakis</p>
               </div>
             </div>
             <p className="text-gray-400 mb-4">
