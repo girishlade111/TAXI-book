@@ -147,4 +147,66 @@
     @apply bg-taxi rounded-full w-12 h-12 flex items-center justify-center mx-auto mb-4;
     box-shadow: 0 0 15px rgba(255, 204, 0, 0.4);
   }
+
+  /* New carousel animation styles */
+  @keyframes slide-in {
+    0% {
+      opacity: 0;
+      transform: translateX(100%);
+    }
+    100% {
+      opacity: 1;
+      transform: translateX(0);
+    }
+  }
+  
+  @keyframes slide-out {
+    0% {
+      opacity: 1;
+      transform: translateX(0);
+    }
+    100% {
+      opacity: 0;
+      transform: translateX(-100%);
+    }
+  }
+  
+  .animate-slide-in {
+    animation: slide-in 0.5s ease-out forwards;
+  }
+  
+  .animate-slide-out {
+    animation: slide-out 0.5s ease-out forwards;
+  }
+  
+  /* Taxi drive animation */
+  @keyframes taxi-drive {
+    0% {
+      transform: translateX(-120%);
+    }
+    100% {
+      transform: translateX(120vw);
+    }
+  }
+  
+  .animate-taxi-drive {
+    animation: taxi-drive 15s linear infinite;
+  }
+  
+  /* Float animation */
+  @keyframes float {
+    0% {
+      transform: translateY(0px);
+    }
+    50% {
+      transform: translateY(-10px);
+    }
+    100% {
+      transform: translateY(0px);
+    }
+  }
+  
+  .animate-float {
+    animation: float 5s ease-in-out infinite;
+  }
 }
