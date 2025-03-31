@@ -47,6 +47,17 @@ const Hero = () => {
 
       {/* Content */}
       <div className="relative z-10 container mx-auto px-4 pt-36 pb-24 md:pt-48 md:pb-32 flex flex-col items-center justify-center text-center">
+        {/* Main Heading - Moved above the images */}
+        <div className="max-w-4xl mx-auto mb-8 backdrop-blur-sm bg-black/10 p-6 rounded-2xl border border-white/10">
+          <h1 className="text-4xl md:text-6xl lg:text-7xl font-extrabold text-white mb-6 drop-shadow-lg animate-slide-in">
+            Discover <span className="bg-clip-text text-transparent bg-gradient-to-r from-taxi to-taxi-light">Amorgos Island</span> <br />
+            <span className="relative inline-block mt-2">
+              in Style
+              <span className="absolute -bottom-2 left-0 w-full h-1 bg-taxi"></span>
+            </span>
+          </h1>
+        </div>
+        
         {/* Amorgos Island Taxi Images - Now Two Side by Side */}
         <div className="mb-8 flex flex-col md:flex-row gap-6 justify-center items-center">
           {/* First Taxi Image */}
@@ -61,14 +72,6 @@ const Hero = () => {
         </div>
         
         <div className="max-w-4xl mx-auto backdrop-blur-sm bg-black/10 p-8 rounded-2xl border border-white/10">
-          <h1 className="text-4xl md:text-6xl lg:text-7xl font-extrabold text-white mb-6 drop-shadow-lg animate-slide-in">
-            Discover <span className="bg-clip-text text-transparent bg-gradient-to-r from-taxi to-taxi-light">Amorgos Island</span> <br />
-            <span className="relative inline-block mt-2">
-              in Style
-              <span className="absolute -bottom-2 left-0 w-full h-1 bg-taxi"></span>
-            </span>
-          </h1>
-          
           <p className="text-xl md:text-2xl text-white/90 max-w-3xl mx-auto mb-10 drop-shadow-md font-light">
             Premium taxi services with professional local drivers, comfortable vehicles,
             and the best island experience.
