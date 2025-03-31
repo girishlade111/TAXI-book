@@ -108,6 +108,11 @@ export default {
 				'fade-in': {
 					'0%': { opacity: '0' },
 					'100%': { opacity: '1' }
+				},
+				'pulse': {
+					'0%': { transform: 'scale(0.95)', opacity: '0.7' },
+					'50%': { transform: 'scale(1.05)', opacity: '1' },
+					'100%': { transform: 'scale(0.95)', opacity: '0.7' }
 				}
 			},
 			animation: {
@@ -116,8 +121,9 @@ export default {
 				'pulse-soft': 'pulse-soft 2s infinite ease-in-out',
 				'float': 'float 6s infinite ease-in-out',
 				'slide-in': 'slide-in 0.5s ease-out',
-				'taxi-drive': 'taxi-drive 10s linear infinite',
-				'fade-in': 'fade-in 0.5s ease-out'
+				'taxi-drive': 'taxi-drive 15s linear infinite',
+				'fade-in': 'fade-in 0.5s ease-out',
+				'pulse': 'pulse 3s infinite ease-in-out'
 			}
 		}
 	},

@@ -130,4 +130,21 @@
   .animated-border-button:hover::before {
     left: 0;
   }
+  
+  /* New styles for the enhanced hero section */
+  .glass-card {
+    @apply bg-white/10 backdrop-blur-sm p-6 rounded-xl border border-white/20;
+    transition: all 0.3s ease;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+  }
+  
+  .glass-card:hover {
+    @apply bg-white/15 border-white/30;
+    box-shadow: 0 8px 32px rgba(255, 204, 0, 0.15);
+  }
+  
+  .feature-icon-wrapper {
+    @apply bg-taxi rounded-full w-12 h-12 flex items-center justify-center mx-auto mb-4;
+    box-shadow: 0 0 15px rgba(255, 204, 0, 0.4);
+  }
 }
