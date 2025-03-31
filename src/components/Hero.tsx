@@ -1,11 +1,12 @@
-import React, { useEffect, useState } from "react";
+
+import React, { useEffect, useState, useRef } from "react";
 import { Button } from "@/components/ui/button";
 import { Car, Calendar, Clock, MapPin, Star, ChevronDown } from "lucide-react";
 import { Carousel, CarouselContent, CarouselItem, CarouselPrevious, CarouselNext } from "@/components/ui/carousel";
 
 const Hero = () => {
   const [currentSlide, setCurrentSlide] = useState(0);
-  const [autoplayInterval, setAutoplayInterval] = useState<NodeJS.Timeout | null>(null);
+  const intervalRef = useRef<NodeJS.Timeout | null>(null);
   
   const backgroundImages = [
     "/lovable-uploads/35266cbe-3406-4a67-839a-d5655b86bfdd.png",
@@ -23,18 +24,24 @@ const Hero = () => {
   ];
   
   useEffect(() => {
-    // Set up autoplay for the carousel
-    const interval = setInterval(() => {
-      setCurrentSlide(prev => prev === backgroundImages.length - 1 ? 0 : prev + 1);
+    // Clear any existing interval
+    if (intervalRef.current) {
+      clearInterval(intervalRef.current);
+    }
+    
+    // Set up a new autoplay interval
+    intervalRef.current = setInterval(() => {
+      setCurrentSlide(prev => (prev === backgroundImages.length - 1 ? 0 : prev + 1));
     }, 5000); // Change slide every 5 seconds
 
-    setAutoplayInterval(interval);
+    // Cleanup function
     return () => {
-      if (autoplayInterval) {
-        clearInterval(autoplayInterval);
+      if (intervalRef.current) {
+        clearInterval(intervalRef.current);
       }
     };
-  }, [autoplayInterval, backgroundImages.length]);
+  }, [backgroundImages.length]); // Only depend on the array length
+
   const scrollToNextSection = () => {
     const servicesSection = document.getElementById('services');
     if (servicesSection) {
@@ -44,20 +51,23 @@ const Hero = () => {
     }
   };
 
-  return <section className="relative min-h-screen overflow-hidden">
+  return (
+    <section className="relative min-h-screen overflow-hidden">
       {/* Background Carousel */}
       <div className="absolute inset-0 w-full h-full z-0">
-        <Carousel className="w-full h-full" opts={{
-        loop: true,
-        skipSnaps: true
-      }}>
+        <Carousel className="w-full h-full">
           <CarouselContent className="h-full">
-            {backgroundImages.map((image, index) => <CarouselItem key={index} className="h-full">
-                <div className="w-full h-full bg-cover bg-center transition-all duration-1000 ease-in-out transform scale-105" style={{
-              backgroundImage: `url(${image})`,
-              opacity: currentSlide === index ? 1 : 0
-            }} />
-              </CarouselItem>)}
+            {backgroundImages.map((image, index) => (
+              <CarouselItem key={index} className="h-full">
+                <div 
+                  className="w-full h-full bg-cover bg-center transition-all duration-1000 ease-in-out transform scale-105" 
+                  style={{
+                    backgroundImage: `url(${image})`,
+                    opacity: currentSlide === index ? 1 : 0
+                  }} 
+                />
+              </CarouselItem>
+            ))}
           </CarouselContent>
         </Carousel>
       </div>
@@ -90,7 +100,7 @@ const Hero = () => {
       </div>
 
       {/* Content */}
-      <div className="relative z-20 container mx-auto px-4 pt-36 pb-24 md:pt-48 md:pb-32 flex flex-col items-center justify-center text-center rounded-sm bg-gray-600">
+      <div className="relative z-20 container mx-auto px-4 pt-36 pb-24 md:pt-48 md:pb-32 flex flex-col items-center justify-center text-center rounded-sm">
         {/* Main Heading - Moved above the images */}
         <div className="max-w-4xl mx-auto mb-8 backdrop-blur-sm bg-black/10 p-6 rounded-2xl border border-white/10">
           <h1 className="text-4xl md:text-6xl lg:text-7xl font-extrabold text-white mb-6 drop-shadow-lg animate-slide-in">
@@ -102,19 +112,9 @@ const Hero = () => {
           </h1>
         </div>
         
-        {/* Amorgos Island Taxi Images - Now Two Side by Side */}
+        {/* Vehicle Image Container */}
         <div className="mb-8 flex flex-col md:flex-row gap-6 justify-center items-center">
-          {/* First Taxi Image */}
-          <div className="max-w-xs md:max-w-sm animate-float">
-            
-          </div>
-          
-          {/* Duplicated Taxi Image */}
-          <div className="max-w-xs md:max-w-sm animate-float" style={{
-          animationDelay: "0.3s"
-        }}>
-            
-          </div>
+          {/* You can add vehicle images here if needed */}
         </div>
         
         <div className="max-w-4xl mx-auto backdrop-blur-sm bg-black/10 p-8 rounded-2xl border border-white/10">
@@ -172,7 +172,14 @@ const Hero = () => {
         
         {/* Carousel navigation dots */}
         <div className="absolute bottom-24 left-1/2 transform -translate-x-1/2 flex space-x-2 z-30">
-          {backgroundImages.map((_, index) => <button key={index} onClick={() => setCurrentSlide(index)} className={`w-3 h-3 rounded-full transition-all duration-300 ${currentSlide === index ? 'bg-taxi scale-125' : 'bg-white/50 hover:bg-white/80'}`} aria-label={`Go to slide ${index + 1}`} />)}
+          {backgroundImages.map((_, index) => (
+            <button 
+              key={index} 
+              onClick={() => setCurrentSlide(index)} 
+              className={`w-3 h-3 rounded-full transition-all duration-300 ${currentSlide === index ? 'bg-taxi scale-125' : 'bg-white/50 hover:bg-white/80'}`} 
+              aria-label={`Go to slide ${index + 1}`} 
+            />
+          ))}
         </div>
         
         {/* Scroll down indicator */}
@@ -184,7 +191,8 @@ const Hero = () => {
       
       {/* Diagonal clip bottom */}
       <div className="absolute bottom-0 left-0 right-0 h-24 bg-background clip-path-diagonal z-20" />
-    </section>;
+    </section>
+  );
 };
 
 export default Hero;
