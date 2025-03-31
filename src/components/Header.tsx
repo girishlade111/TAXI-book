@@ -17,7 +17,7 @@ const Header = () => {
         <div className="flex items-center space-x-2">
           <Car className="h-8 w-8 text-taxi" />
           <div>
-            <h1 className="text-xl font-bold">TAXI AMORGOS </h1>
+            <h1 className="text-xl font-bold text-yellow-300">TAXI AMORGOS </h1>
             <p className="text-xs text-muted-foreground">By Lyviakis</p>
           </div>
         </div>
