@@ -1,5 +1,7 @@
+
 import React from "react";
 import { Car, Phone, Mail, MapPin, ArrowUp } from "lucide-react";
+
 const Footer = () => {
   const scrollToTop = () => {
     window.scrollTo({
@@ -7,16 +9,17 @@ const Footer = () => {
       behavior: "smooth"
     });
   };
+  
   return <footer className="bg-gray-900 text-white">
       <div className="container mx-auto px-4 py-12">
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-8">
           <div>
             <div className="flex items-center space-x-2 mb-4">
-              <Car className="h-8 w-8 text-taxi" />
-              <div>
-                <h2 className="text-xl font-bold">TAXI AMORGOS</h2>
-                <p className="text-xs text-gray-400">By Lyviakis</p>
-              </div>
+              <img 
+                src="/lovable-uploads/d26204ad-900d-43b1-9818-b7cf1ab6ff4b.png" 
+                alt="TAXI AMORGOS By Lyviakis" 
+                className="h-16 object-contain"
+              />
             </div>
             <p className="text-gray-400 mb-4">
               Your trusted transportation partner in Amorgos Island. Professional service, comfortable vehicles, and competitive prices.
@@ -93,4 +96,5 @@ const Footer = () => {
       </div>
     </footer>;
 };
+
 export default Footer;
