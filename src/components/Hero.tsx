@@ -2,17 +2,24 @@ import React, { useEffect, useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Car, Calendar, Clock, MapPin, Star, ChevronDown } from "lucide-react";
 import { Carousel, CarouselContent, CarouselItem, CarouselPrevious, CarouselNext } from "@/components/ui/carousel";
+
 const Hero = () => {
   const [currentSlide, setCurrentSlide] = useState(0);
   const [autoplayInterval, setAutoplayInterval] = useState<NodeJS.Timeout | null>(null);
-  const backgroundImages = ["/lovable-uploads/35266cbe-3406-4a67-839a-d5655b86bfdd.png",
-  // Helicopter and taxi image
-  "/lovable-uploads/71adb121-c781-46e9-9c84-2b09ca3b45ed.png",
-  // Yacht and taxi image
-  "/lovable-uploads/169ba8ae-3c6a-4ff1-9bfb-6948a45db348.png",
-  // Two taxis side by side
-  "/lovable-uploads/c382fb30-7129-4004-a2ed-c54a95a83927.png" // Taxi at sunset
+  
+  const backgroundImages = [
+    "/lovable-uploads/35266cbe-3406-4a67-839a-d5655b86bfdd.png",
+    // Helicopter and taxi image
+    "/lovable-uploads/71adb121-c781-46e9-9c84-2b09ca3b45ed.png",
+    // Yacht and taxi image
+    "/lovable-uploads/169ba8ae-3c6a-4ff1-9bfb-6948a45db348.png",
+    // Two taxis side by side
+    "/lovable-uploads/c382fb30-7129-4004-a2ed-c54a95a83927.png", 
+    // Taxi at sunset
+    "/lovable-uploads/d9dc9629-95c4-4a3e-a0f8-b3892180343f.png"
+    // New image with two taxis by the sea
   ];
+  
   useEffect(() => {
     // Set up autoplay for the carousel
     const interval = setInterval(() => {
@@ -34,6 +41,7 @@ const Hero = () => {
       });
     }
   };
+
   return <section className="relative min-h-screen overflow-hidden">
       {/* Background Carousel */}
       <div className="absolute inset-0 w-full h-full z-0">
@@ -176,4 +184,5 @@ const Hero = () => {
       <div className="absolute bottom-0 left-0 right-0 h-24 bg-background clip-path-diagonal z-20" />
     </section>;
 };
+
 export default Hero;
