@@ -7,9 +7,9 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@
 import { Textarea } from "@/components/ui/textarea";
 import { Calendar } from "@/components/ui/calendar";
 import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
-import { format } from "date-fns";
+import { format, addDays, isBefore } from "date-fns";
 import { cn } from "@/lib/utils";
-import { Calendar as CalendarIcon, Clock, CreditCard, Car, Users, Info } from "lucide-react";
+import { Calendar as CalendarIcon, Clock, CreditCard, Car, Users, Info, AlertCircle } from "lucide-react";
 import { toast } from "sonner";
 import PaymentIntegration from "./PaymentIntegration";
 
@@ -44,6 +44,22 @@ const BookingForm = () => {
   const [bookingReference, setBookingReference] = useState("");
   const [estimatedPrice, setEstimatedPrice] = useState(0);
 
+  // Create date objects for validation
+  const today = new Date();
+  const tomorrow = addDays(today, 1);
+  
+  // Function to handle date selection with validation
+  const handleDateSelect = (selectedDate: Date | undefined) => {
+    setDate(selectedDate);
+    
+    // If date is earlier than tomorrow, show a warning
+    if (selectedDate && isBefore(selectedDate, tomorrow)) {
+      toast.error("Bookings must be at least 1 day in advance.", {
+        icon: <AlertCircle className="h-4 w-4" />,
+      });
+    }
+  };
+
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const { name, value } = e.target;
     setFormData(prev => ({ ...prev, [name]: value }));
@@ -70,6 +86,22 @@ const BookingForm = () => {
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
+    
+    // Validate if date is at least tomorrow
+    if (!date) {
+      toast.error("Please select a pickup date", {
+        icon: <AlertCircle className="h-4 w-4" />,
+      });
+      return;
+    }
+    
+    if (isBefore(date, tomorrow)) {
+      toast.error("Bookings must be at least 1 day in advance.", {
+        icon: <AlertCircle className="h-4 w-4" />,
+      });
+      return;
+    }
+    
     setIsSubmitting(true);
 
     // Generate a random booking reference
@@ -266,11 +298,16 @@ const BookingForm = () => {
                           <Calendar
                             mode="single"
                             selected={date}
-                            onSelect={setDate}
+                            onSelect={handleDateSelect}
+                            disabled={(date) => isBefore(date, tomorrow)}
                             initialFocus
+                            className="pointer-events-auto"
                           />
                         </PopoverContent>
                       </Popover>
+                      <p className="text-xs text-muted-foreground mt-1">
+                        Bookings must be made at least 1 day in advance.
+                      </p>
                     </div>
                   </div>
                 </div>
