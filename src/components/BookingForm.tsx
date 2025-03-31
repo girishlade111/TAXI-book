@@ -1,4 +1,3 @@
-
 import React, { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -10,8 +9,9 @@ import { Calendar } from "@/components/ui/calendar";
 import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
 import { format } from "date-fns";
 import { cn } from "@/lib/utils";
-import { Calendar as CalendarIcon, Clock, CreditCard, Car, Users } from "lucide-react";
+import { Calendar as CalendarIcon, Clock, CreditCard, Car, Users, Info } from "lucide-react";
 import { toast } from "sonner";
+import PaymentIntegration from "./PaymentIntegration";
 
 const locations = [
   "Aegiali",
@@ -40,6 +40,9 @@ const BookingForm = () => {
     notes: ""
   });
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [showPayment, setShowPayment] = useState(false);
+  const [bookingReference, setBookingReference] = useState("");
+  const [estimatedPrice, setEstimatedPrice] = useState(0);
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const { name, value } = e.target;
@@ -48,6 +51,17 @@ const BookingForm = () => {
 
   const handleSelectChange = (name: string, value: string) => {
     setFormData(prev => ({ ...prev, [name]: value }));
+    
+    // If both pickup and destination are selected, calculate an estimated price
+    if (name === "pickup" || name === "destination") {
+      if (formData.pickup && formData.destination) {
+        // This is a simplified pricing model for demo purposes
+        // In a real app, you would have proper distance/zone-based pricing
+        const basePrice = 20;
+        const randomFactor = Math.floor(Math.random() * 15) + 5; // Random price between 5-20€
+        setEstimatedPrice(basePrice + randomFactor);
+      }
+    }
   };
 
   const handleRadioChange = (value: string) => {
@@ -58,25 +72,81 @@ const BookingForm = () => {
     e.preventDefault();
     setIsSubmitting(true);
 
-    // Simulate form submission
-    setTimeout(() => {
-      toast.success("Booking received! We'll confirm shortly via email.");
+    // Generate a random booking reference
+    const reference = `AMG-${Math.floor(Math.random() * 900000) + 100000}`;
+    setBookingReference(reference);
+    
+    // If card payment is selected, show payment screen
+    if (formData.paymentMethod === "card") {
       setIsSubmitting(false);
-      
-      // Reset form
-      setFormData({
-        name: "",
-        email: "",
-        phone: "",
-        pickup: "",
-        destination: "",
-        passengers: "1",
-        paymentMethod: "cash",
-        notes: ""
-      });
-      setDate(undefined);
-    }, 1500);
+      setShowPayment(true);
+    } else {
+      // For cash payments, proceed with the normal flow
+      // Simulate form submission
+      setTimeout(() => {
+        toast.success("Booking received! We'll confirm shortly via email.");
+        setIsSubmitting(false);
+        resetForm();
+      }, 1500);
+    }
   };
+
+  const handlePaymentSuccess = () => {
+    setShowPayment(false);
+    toast.success("Booking confirmed! Reference: " + bookingReference);
+    resetForm();
+  };
+
+  const handlePaymentCancel = () => {
+    setShowPayment(false);
+    toast("Payment cancelled. You can try again or pay with cash.", {
+      icon: <Info className="h-4 w-4" />,
+    });
+  };
+
+  const resetForm = () => {
+    // Reset form
+    setFormData({
+      name: "",
+      email: "",
+      phone: "",
+      pickup: "",
+      destination: "",
+      passengers: "1",
+      paymentMethod: "cash",
+      notes: ""
+    });
+    setDate(undefined);
+    setEstimatedPrice(0);
+  };
+
+  if (showPayment) {
+    return (
+      <section id="booking" className="py-20 px-4 bg-background">
+        <div className="container mx-auto">
+          <div className="text-center max-w-3xl mx-auto mb-16">
+            <h2 className="text-3xl md:text-4xl font-bold mb-4">Complete Your Payment</h2>
+            <p className="text-lg text-muted-foreground">
+              Secure your booking by completing payment through our trusted partner, Cardlink.
+            </p>
+          </div>
+          
+          <PaymentIntegration 
+            amount={estimatedPrice}
+            bookingReference={bookingReference}
+            onSuccess={handlePaymentSuccess}
+            onCancel={handlePaymentCancel}
+          />
+          
+          <div className="mt-10 text-center text-sm text-muted-foreground">
+            <p>
+              Need help? Contact our support team at <a href="mailto:support@amorgostaxi.gr" className="text-taxi hover:underline">support@amorgostaxi.gr</a>
+            </p>
+          </div>
+        </div>
+      </section>
+    );
+  }
 
   return (
     <section id="booking" className="py-20 px-4 bg-background">
@@ -260,12 +330,24 @@ const BookingForm = () => {
                       <div className="flex items-center space-x-2">
                         <RadioGroupItem value="card" id="card" />
                         <Label htmlFor="card" className="cursor-pointer flex items-center">
-                          <CreditCard className="h-4 w-4 mr-1" /> Card
+                          <CreditCard className="h-4 w-4 mr-1" /> Card (Cardlink)
                         </Label>
                       </div>
                     </RadioGroup>
                   </div>
                 </div>
+                
+                {estimatedPrice > 0 && (
+                  <div className="bg-muted/50 p-4 rounded-md">
+                    <div className="flex justify-between items-center">
+                      <span className="font-medium">Estimated Price:</span>
+                      <span className="text-xl font-bold text-taxi">€{estimatedPrice.toFixed(2)}</span>
+                    </div>
+                    <p className="text-xs text-muted-foreground mt-1">
+                      This is an estimated price. The final price may vary based on waiting time or additional services.
+                    </p>
+                  </div>
+                )}
                 
                 <div className="space-y-2">
                   <Label htmlFor="notes">Special Requests (Optional)</Label>
@@ -291,7 +373,7 @@ const BookingForm = () => {
                     ) : (
                       <>
                         <Car className="mr-2 h-5 w-5" />
-                        Book My Taxi
+                        {formData.paymentMethod === "card" ? "Proceed to Payment" : "Book My Taxi"}
                       </>
                     )}
                   </Button>
