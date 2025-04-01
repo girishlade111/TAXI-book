@@ -1,37 +1,32 @@
-
 import React, { useEffect, useState, useRef } from "react";
 import { Button } from "@/components/ui/button";
 import { Car, Calendar, Clock, MapPin, Star, ChevronDown } from "lucide-react";
 import { Carousel, CarouselContent, CarouselItem, CarouselPrevious, CarouselNext } from "@/components/ui/carousel";
-
 const Hero = () => {
   const [currentSlide, setCurrentSlide] = useState(0);
   const intervalRef = useRef<NodeJS.Timeout | null>(null);
-  
-  const backgroundImages = [
-    "/lovable-uploads/35266cbe-3406-4a67-839a-d5655b86bfdd.png",
-    // Helicopter and taxi image
-    "/lovable-uploads/71adb121-c781-46e9-9c84-2b09ca3b45ed.png",
-    // Yacht and taxi image
-    "/lovable-uploads/169ba8ae-3c6a-4ff1-9bfb-6948a45db348.png",
-    // Two taxis side by side
-    "/lovable-uploads/c382fb30-7129-4004-a2ed-c54a95a83927.png", 
-    // Taxi at sunset
-    "/lovable-uploads/d9dc9629-95c4-4a3e-a0f8-b3892180343f.png",
-    // New image with two taxis by the sea
-    "/lovable-uploads/3f9e2210-7e6a-4a2f-b1fb-8f5043432703.png"
-    // VIP Transfer van by yacht
+  const backgroundImages = ["/lovable-uploads/35266cbe-3406-4a67-839a-d5655b86bfdd.png",
+  // Helicopter and taxi image
+  "/lovable-uploads/71adb121-c781-46e9-9c84-2b09ca3b45ed.png",
+  // Yacht and taxi image
+  "/lovable-uploads/169ba8ae-3c6a-4ff1-9bfb-6948a45db348.png",
+  // Two taxis side by side
+  "/lovable-uploads/c382fb30-7129-4004-a2ed-c54a95a83927.png",
+  // Taxi at sunset
+  "/lovable-uploads/d9dc9629-95c4-4a3e-a0f8-b3892180343f.png",
+  // New image with two taxis by the sea
+  "/lovable-uploads/3f9e2210-7e6a-4a2f-b1fb-8f5043432703.png"
+  // VIP Transfer van by yacht
   ];
-  
   useEffect(() => {
     // Clear any existing interval
     if (intervalRef.current) {
       clearInterval(intervalRef.current);
     }
-    
+
     // Set up a new autoplay interval
     intervalRef.current = setInterval(() => {
-      setCurrentSlide(prev => (prev === backgroundImages.length - 1 ? 0 : prev + 1));
+      setCurrentSlide(prev => prev === backgroundImages.length - 1 ? 0 : prev + 1);
     }, 5000); // Change slide every 5 seconds
 
     // Cleanup function
@@ -50,24 +45,17 @@ const Hero = () => {
       });
     }
   };
-
-  return (
-    <section className="relative min-h-screen overflow-hidden">
+  return <section className="relative min-h-screen overflow-hidden">
       {/* Background Carousel */}
       <div className="absolute inset-0 w-full h-full z-0">
         <Carousel className="w-full h-full">
           <CarouselContent className="h-full">
-            {backgroundImages.map((image, index) => (
-              <CarouselItem key={index} className="h-full">
-                <div 
-                  className="w-full h-full bg-cover bg-center transition-all duration-1000 ease-in-out transform scale-105" 
-                  style={{
-                    backgroundImage: `url(${image})`,
-                    opacity: currentSlide === index ? 1 : 0
-                  }} 
-                />
-              </CarouselItem>
-            ))}
+            {backgroundImages.map((image, index) => <CarouselItem key={index} className="h-full">
+                <div className="w-full h-full bg-cover bg-center transition-all duration-1000 ease-in-out transform scale-105" style={{
+              backgroundImage: `url(${image})`,
+              opacity: currentSlide === index ? 1 : 0
+            }} />
+              </CarouselItem>)}
           </CarouselContent>
         </Carousel>
       </div>
@@ -103,7 +91,7 @@ const Hero = () => {
       <div className="relative z-20 container mx-auto px-4 pt-36 pb-24 md:pt-48 md:pb-32 flex flex-col items-center justify-center text-center rounded-sm">
         {/* Main Heading - Moved above the images */}
         <div className="max-w-4xl mx-auto mb-8 backdrop-blur-sm bg-black/10 p-6 rounded-2xl border border-white/10">
-          <h1 className="text-4xl md:text-6xl lg:text-7xl font-extrabold text-white mb-6 drop-shadow-lg animate-slide-in">
+          <h1 className="text-4xl lg:text-7xl font-extrabold text-white mb-6 drop-shadow-lg animate-slide-in md:text-3xl">
             Discover <span className="bg-clip-text text-transparent bg-gradient-to-r from-taxi to-taxi-light">Amorgos Island</span> <br />
             <span className="relative inline-block mt-2">
               in Style
@@ -172,14 +160,7 @@ const Hero = () => {
         
         {/* Carousel navigation dots */}
         <div className="absolute bottom-24 left-1/2 transform -translate-x-1/2 flex space-x-2 z-30">
-          {backgroundImages.map((_, index) => (
-            <button 
-              key={index} 
-              onClick={() => setCurrentSlide(index)} 
-              className={`w-3 h-3 rounded-full transition-all duration-300 ${currentSlide === index ? 'bg-taxi scale-125' : 'bg-white/50 hover:bg-white/80'}`} 
-              aria-label={`Go to slide ${index + 1}`} 
-            />
-          ))}
+          {backgroundImages.map((_, index) => <button key={index} onClick={() => setCurrentSlide(index)} className={`w-3 h-3 rounded-full transition-all duration-300 ${currentSlide === index ? 'bg-taxi scale-125' : 'bg-white/50 hover:bg-white/80'}`} aria-label={`Go to slide ${index + 1}`} />)}
         </div>
         
         {/* Scroll down indicator */}
@@ -191,8 +172,6 @@ const Hero = () => {
       
       {/* Diagonal clip bottom */}
       <div className="absolute bottom-0 left-0 right-0 h-24 bg-background clip-path-diagonal z-20" />
-    </section>
-  );
+    </section>;
 };
-
 export default Hero;
