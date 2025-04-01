@@ -1,4 +1,3 @@
-
 import React, { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -6,7 +5,6 @@ import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
 import { Phone, Mail, MapPin, Send } from "lucide-react";
 import { toast } from "sonner";
-
 const Contact = () => {
   const [contactForm, setContactForm] = useState({
     name: "",
@@ -14,12 +12,16 @@ const Contact = () => {
     message: ""
   });
   const [isSubmitting, setIsSubmitting] = useState(false);
-
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
-    const { name, value } = e.target;
-    setContactForm(prev => ({ ...prev, [name]: value }));
+    const {
+      name,
+      value
+    } = e.target;
+    setContactForm(prev => ({
+      ...prev,
+      [name]: value
+    }));
   };
-
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     setIsSubmitting(true);
@@ -33,17 +35,16 @@ Email: ${contactForm.email}
 Message:
 ${contactForm.message}
     `;
-    
     const mailtoLink = `mailto:taxiamorgos@gmail.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
-    
+
     // Open email client
     window.location.href = mailtoLink;
-    
+
     // Show success message and reset form
     setTimeout(() => {
       toast.success("Email client opened! Send your message directly.");
       setIsSubmitting(false);
-      
+
       // Reset form
       setContactForm({
         name: "",
@@ -52,9 +53,7 @@ ${contactForm.message}
       });
     }, 1000);
   };
-
-  return (
-    <section id="contact" className="py-20 px-4 sea-gradient text-white">
+  return <section id="contact" className="py-20 px-4 sea-gradient text-white">
       <div className="container mx-auto">
         <div className="text-center max-w-3xl mx-auto mb-16">
           <h2 className="text-3xl md:text-4xl font-bold mb-4">Contact Us</h2>
@@ -67,7 +66,7 @@ ${contactForm.message}
           {/* Contact Information */}
           <div className="space-y-10">
             <div>
-              <h3 className="text-2xl font-semibold mb-6">AMORGOS TRANSPORT</h3>
+              <h3 className="text-2xl font-semibold mb-6">TAXI AMORGOS</h3>
               <p className="text-white/80 mb-8 max-w-md">
                 Your reliable transportation partner in Amorgos. Available 24/7 for all your travel needs.
               </p>
@@ -115,65 +114,29 @@ ${contactForm.message}
             <form onSubmit={handleSubmit} className="space-y-6">
               <div className="space-y-2">
                 <Label htmlFor="contact-name" className="text-white">Your Name</Label>
-                <Input 
-                  id="contact-name" 
-                  name="name" 
-                  placeholder="John Doe" 
-                  className="bg-white/5 border-white/20 text-white placeholder:text-white/50"
-                  value={contactForm.name}
-                  onChange={handleInputChange}
-                  required
-                />
+                <Input id="contact-name" name="name" placeholder="John Doe" className="bg-white/5 border-white/20 text-white placeholder:text-white/50" value={contactForm.name} onChange={handleInputChange} required />
               </div>
               
               <div className="space-y-2">
                 <Label htmlFor="contact-email" className="text-white">Email Address</Label>
-                <Input 
-                  id="contact-email" 
-                  name="email" 
-                  type="email" 
-                  placeholder="john@example.com" 
-                  className="bg-white/5 border-white/20 text-white placeholder:text-white/50"
-                  value={contactForm.email}
-                  onChange={handleInputChange}
-                  required
-                />
+                <Input id="contact-email" name="email" type="email" placeholder="john@example.com" className="bg-white/5 border-white/20 text-white placeholder:text-white/50" value={contactForm.email} onChange={handleInputChange} required />
               </div>
               
               <div className="space-y-2">
                 <Label htmlFor="contact-message" className="text-white">Message</Label>
-                <Textarea 
-                  id="contact-message" 
-                  name="message" 
-                  placeholder="How can we help you?" 
-                  className="min-h-[150px] bg-white/5 border-white/20 text-white placeholder:text-white/50"
-                  value={contactForm.message}
-                  onChange={handleInputChange}
-                  required
-                />
+                <Textarea id="contact-message" name="message" placeholder="How can we help you?" className="min-h-[150px] bg-white/5 border-white/20 text-white placeholder:text-white/50" value={contactForm.message} onChange={handleInputChange} required />
               </div>
               
-              <Button 
-                type="submit" 
-                className="w-full bg-white text-amorgos-blue hover:bg-white/90"
-                size="lg"
-                disabled={isSubmitting}
-              >
-                {isSubmitting ? (
-                  "Sending..."
-                ) : (
-                  <>
+              <Button type="submit" className="w-full bg-white text-amorgos-blue hover:bg-white/90" size="lg" disabled={isSubmitting}>
+                {isSubmitting ? "Sending..." : <>
                     <Send className="mr-2 h-5 w-5" />
                     Send Message
-                  </>
-                )}
+                  </>}
               </Button>
             </form>
           </div>
         </div>
       </div>
-    </section>
-  );
+    </section>;
 };
-
 export default Contact;
