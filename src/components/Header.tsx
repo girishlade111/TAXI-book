@@ -1,10 +1,13 @@
+
 import React, { useState, useEffect } from "react";
 import { Car, Menu, Phone, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
+
 const Header = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+
   useEffect(() => {
     const handleScroll = () => {
       setIsScrolled(window.scrollY > 10);
@@ -12,10 +15,17 @@ const Header = () => {
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
+
   return <header className={cn("fixed top-0 left-0 right-0 z-50 transition-all duration-300", isScrolled ? "bg-white/90 backdrop-blur-md shadow-md py-2" : "bg-transparent py-4")}>
       <div className="container mx-auto px-4 flex items-center justify-between">
         <div className="flex items-center space-x-2">
-          
+          <div className="flex items-center">
+            <Car className="h-7 w-7 text-taxi mr-2" />
+            <div className="font-bold">
+              <span className="text-xl md:text-2xl">TAXI AMORGOS</span>
+              <span className="block text-sm md:text-base text-taxi">Lyviakis</span>
+            </div>
+          </div>
         </div>
 
         {/* Desktop Navigation */}
@@ -72,4 +82,5 @@ const Header = () => {
         </div>}
     </header>;
 };
+
 export default Header;
