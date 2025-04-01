@@ -1,3 +1,4 @@
+
 import React, { useRef } from "react";
 import { Button } from "@/components/ui/button";
 import { Car, Calendar, Clock, MapPin, Star, ChevronDown } from "lucide-react";
@@ -70,16 +71,16 @@ const Hero = () => {
           </p>
           
           <div className="flex flex-col sm:flex-row gap-6 mb-12 justify-center">
-            <Button asChild className="bg-taxi hover:bg-taxi-dark text-taxi-contrast text-lg px-10 py-7 rounded-xl shadow-[0_0_15px_rgba(255,204,0,0.5)] hover:shadow-[0_0_25px_rgba(255,204,0,0.7)] transition-all duration-300" size="lg">
+            <Button asChild className="bg-taxi hover:bg-taxi-dark text-taxi-contrast text-base px-6 py-2 rounded-lg shadow-[0_0_15px_rgba(255,204,0,0.5)] hover:shadow-[0_0_25px_rgba(255,204,0,0.7)] transition-all duration-300" size="default">
               <a href="#booking">
-                <Car className="mr-2 h-5 w-5" />
-                Book Your Ride Now
+                <Car className="mr-2 h-4 w-4" />
+                Book Your Ride
               </a>
             </Button>
-            <Button asChild className="bg-white/10 backdrop-blur-sm hover:bg-white/20 text-white border border-white/20 text-lg px-10 py-7 rounded-xl hover:border-white/40 transition-all duration-300" size="lg" variant="outline">
+            <Button asChild className="bg-white/10 backdrop-blur-sm hover:bg-white/20 text-white border border-white/20 text-base px-6 py-2 rounded-lg hover:border-white/40 transition-all duration-300" size="default" variant="outline">
               <a href="#pricing">
-                <Star className="mr-2 h-5 w-5 text-taxi" />
-                View Our Prices
+                <Star className="mr-2 h-4 w-4 text-taxi" />
+                View Prices
               </a>
             </Button>
           </div>
