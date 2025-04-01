@@ -18,7 +18,7 @@ const Header = () => {
           <div className="flex items-center">
             
             <div className="font-bold">
-              <span className="text-xl md:text-2xl">TAXI AMORGOS</span>
+              <span className="text-xl md:text-xl font-extrabold">TAXI AMORGOS</span>
               <span className="block text-sm md:text-base text-taxi">Lyviakis</span>
             </div>
           </div>
