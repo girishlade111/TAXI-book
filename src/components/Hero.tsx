@@ -64,7 +64,7 @@ const Hero = () => {
         </div>
         
         <div className="max-w-4xl mx-auto backdrop-blur-sm bg-black/10 p-8 border border-white/10 rounded-md py-[3px] px-[3px]">
-          <p className="text-xl text-white/90 max-w-3xl mx-auto mb-10 drop-shadow-md font-light md:text-lg text-center">
+          <p className="text-white/90 max-w-3xl mx-auto mb-10 drop-shadow-md font-light md:text-lg text-base text-left">
             Premium taxi services with professional local drivers, comfortable vehicles,
             and the best island experience.
           </p>
