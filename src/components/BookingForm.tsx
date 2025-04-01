@@ -10,7 +10,7 @@ import { Calendar } from "@/components/ui/calendar";
 import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
 import { format, addDays, isBefore } from "date-fns";
 import { cn } from "@/lib/utils";
-import { Calendar as CalendarIcon, Clock, CreditCard, Car, Users, Info, AlertCircle, ShoppingBag } from "lucide-react";
+import { Calendar as CalendarIcon, Clock, CreditCard, Car, Users, Info, AlertCircle } from "lucide-react";
 import { toast } from "sonner";
 import PaymentIntegration from "./PaymentIntegration";
 import { priceList, findPrice, minimumCharge } from "@/utils/pricingData";
@@ -29,12 +29,7 @@ const getUniqueLocations = () => {
 
 const locations = getUniqueLocations();
 
-// Check if user is coming from shop
-const isFromShop = () => {
-  // This is a simple check if the user is directed from the shop section
-  const urlHash = window.location.hash;
-  return urlHash.includes('from-shop');
-};
+// Check if user is coming from shop (removed since we won't be using it)
 
 const BookingForm = () => {
   const [date, setDate] = useState<Date | undefined>(undefined);
@@ -46,8 +41,7 @@ const BookingForm = () => {
     destination: "",
     passengers: "1",
     paymentMethod: "cash",
-    notes: "",
-    isPickupMerchandise: false
+    notes: ""
   });
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [showPayment, setShowPayment] = useState(false);
@@ -55,22 +49,7 @@ const BookingForm = () => {
   const [estimatedPrice, setEstimatedPrice] = useState<number | null>(null);
   const [priceCalculated, setPriceCalculated] = useState(false);
 
-  // Check if user came from shop on component mount
-  useEffect(() => {
-    if (isFromShop()) {
-      setFormData(prev => ({
-        ...prev,
-        isPickupMerchandise: true,
-        // Prefill pickup location to our shop
-        pickup: "Katapola Port",
-        notes: "Merchandise pickup from Amorgos Taxi Shop."
-      }));
-      
-      toast.info("We've prefilled some details for your merchandise pickup!", {
-        icon: <ShoppingBag className="h-4 w-4" />,
-      });
-    }
-  }, []);
+  // Removed the useEffect for checking if user came from shop since we're not using this functionality
 
   // Create date objects for validation
   const today = new Date();
@@ -124,23 +103,7 @@ const BookingForm = () => {
     setFormData(prev => ({ ...prev, paymentMethod: value }));
   };
 
-  const handleCheckboxChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const { name, checked } = e.target;
-    setFormData(prev => ({ ...prev, [name]: checked }));
-    
-    // If checking the merchandise pickup box, prefill the pickup location
-    if (name === "isPickupMerchandise" && checked) {
-      setFormData(prev => ({
-        ...prev,
-        pickup: "Katapola Port",
-        notes: prev.notes ? prev.notes + "\nMerchandise pickup from Amorgos Taxi Shop." : "Merchandise pickup from Amorgos Taxi Shop."
-      }));
-      
-      toast.info("We've updated your pickup location to our shop!", {
-        icon: <ShoppingBag className="h-4 w-4" />,
-      });
-    }
-  };
+  // Removed handleCheckboxChange since we're removing the checkbox
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
@@ -204,17 +167,11 @@ const BookingForm = () => {
       destination: "",
       passengers: "1",
       paymentMethod: "cash",
-      notes: "",
-      isPickupMerchandise: false
+      notes: ""
     });
     setDate(undefined);
     setEstimatedPrice(null);
     setPriceCalculated(false);
-    
-    // Remove from-shop flag from URL if it exists
-    if (isFromShop()) {
-      window.history.replaceState(null, '', window.location.pathname + window.location.search);
-    }
   };
 
   // Payment screen rendering
@@ -307,21 +264,7 @@ const BookingForm = () => {
                   <div className="space-y-4">
                     <h3 className="text-xl font-semibold mb-4">Ride Details</h3>
                     
-                    {/* Merchandise pickup option */}
-                    <div className="mb-4 flex items-center">
-                      <input
-                        type="checkbox"
-                        id="isPickupMerchandise"
-                        name="isPickupMerchandise"
-                        checked={formData.isPickupMerchandise}
-                        onChange={handleCheckboxChange}
-                        className="mr-2 h-4 w-4 rounded border-gray-300 text-taxi focus:ring-taxi"
-                      />
-                      <label htmlFor="isPickupMerchandise" className="flex items-center cursor-pointer">
-                        <ShoppingBag className="h-4 w-4 mr-1 text-taxi" />
-                        <span>Book taxi to pick up shop merchandise</span>
-                      </label>
-                    </div>
+                    {/* Removed merchandise pickup checkbox */}
                     
                     <div className="space-y-2">
                       <Label htmlFor="pickup">Pickup Location</Label>
