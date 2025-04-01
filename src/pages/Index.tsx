@@ -8,7 +8,6 @@ import Pricing from "@/components/Pricing";
 import BookingForm from "@/components/BookingForm";
 import Contact from "@/components/Contact";
 import Footer from "@/components/Footer";
-import EcommerceStore from "@/components/EcommerceStore";
 import { CreditCard, ShieldCheck, LockKeyhole, ShoppingBag, Car } from "lucide-react";
 
 const Index = () => {
@@ -80,7 +79,7 @@ const Index = () => {
         </div>
         
         <BookingForm />
-        <EcommerceStore />
+        {/* Removed EcommerceStore component */}
         <Contact />
       </main>
       <Footer />
