@@ -90,7 +90,7 @@ const Hero = () => {
       {/* Content */}
       <div className="relative z-20 container mx-auto px-4 pt-36 pb-24 md:pt-48 md:pb-32 flex flex-col items-center justify-center text-center rounded-sm">
         {/* Main Heading - Moved above the images */}
-        <div className="max-w-4xl mx-auto mb-8 backdrop-blur-sm bg-black/10 p-6 rounded-2xl border border-white/10">
+        <div className="max-w-4xl mx-auto mb-8 backdrop-blur-sm bg-black/10 p-6 border border-white/10 rounded-xl">
           <h1 className="text-4xl lg:text-7xl font-extrabold text-white mb-6 drop-shadow-lg animate-slide-in md:text-xl">
             Discover <span className="bg-clip-text text-transparent bg-gradient-to-r from-taxi to-taxi-light">Amorgos Island</span> <br />
             <span className="relative inline-block mt-2">
