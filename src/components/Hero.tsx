@@ -1,8 +1,6 @@
-
 import React, { useRef } from "react";
 import { Button } from "@/components/ui/button";
 import { Car, Calendar, Clock, MapPin, Star, ChevronDown } from "lucide-react";
-
 const Hero = () => {
   const scrollToNextSection = () => {
     const servicesSection = document.getElementById('services');
@@ -12,13 +10,12 @@ const Hero = () => {
       });
     }
   };
-
   return <section className="relative min-h-screen overflow-hidden">
       {/* Static Background Image */}
       <div className="absolute inset-0 w-full h-full z-0">
         <div className="w-full h-full bg-cover bg-center transition-all duration-1000 ease-in-out transform scale-105" style={{
-          backgroundImage: `url('/lovable-uploads/653c472b-f84f-4f6e-b08b-1136e4cee1a5.jpg')`
-        }} />
+        backgroundImage: `url('/lovable-uploads/653c472b-f84f-4f6e-b08b-1136e4cee1a5.jpg')`
+      }} />
       </div>
       
       {/* Gradient overlay */}
@@ -52,7 +49,7 @@ const Hero = () => {
       <div className="relative z-20 container mx-auto px-4 pt-36 pb-24 md:pt-48 md:pb-32 flex flex-col items-center justify-center text-center rounded-sm">
         {/* Main Heading - Moved above the images */}
         <div className="max-w-4xl mb-8 backdrop-blur-sm bg-black/10 p-6 border border-white/10 rounded-xl my-0 mx-0 py-[2px] px-[2px]">
-          <h1 className="text-4xl lg:text-7xl font-extrabold text-white mb-6 drop-shadow-lg animate-slide-in md:text-xl">
+          <h1 className="lg:text-7xl font-extrabold text-white mb-6 drop-shadow-lg animate-slide-in md:text-xl text-center text-lg">
             Discover <span className="bg-clip-text text-transparent bg-gradient-to-r from-taxi to-taxi-light">Amorgos Island</span> <br />
             <span className="relative inline-block mt-2">
               in Style
