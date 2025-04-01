@@ -1,7 +1,8 @@
+
 import React, { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
-import { ShoppingCart, Tag, Plus, Minus } from "lucide-react";
+import { ShoppingCart, Tag, Plus, Minus, Car } from "lucide-react";
 import { toast } from "sonner";
 import PaymentIntegration from "./PaymentIntegration";
 
@@ -55,6 +56,7 @@ const EcommerceStore = () => {
   const [cart, setCart] = useState<CartItem[]>([]);
   const [showPayment, setShowPayment] = useState(false);
   const [orderReference, setOrderReference] = useState("");
+  const [addRide, setAddRide] = useState(false);
   
   // Calculate the total amount for all items in the cart
   const cartTotal = cart.reduce((total, item) => total + (item.price * item.quantity), 0);
@@ -123,14 +125,34 @@ const EcommerceStore = () => {
   // Handle payment success
   const handlePaymentSuccess = () => {
     setShowPayment(false);
+    
+    if (addRide) {
+      // Scroll to booking section
+      const bookingSection = document.getElementById("booking");
+      if (bookingSection) {
+        bookingSection.scrollIntoView({ behavior: "smooth" });
+        toast.success("Payment successful! Now book your taxi to pick up your merchandise.");
+      }
+    } else {
+      toast.success("Order completed successfully! Your items will be ready for pickup at our main office.");
+    }
+    
     setCart([]);
-    toast.success("Order completed successfully! Your items will be ready for pickup at our main office.");
+    setAddRide(false);
   };
   
   // Handle payment cancellation
   const handlePaymentCancel = () => {
     setShowPayment(false);
     toast.info("Payment cancelled. Your cart has been saved.");
+  };
+  
+  // Toggle add ride option
+  const toggleAddRide = () => {
+    setAddRide(!addRide);
+    if (!addRide) {
+      toast.info("We'll help you book a taxi after your purchase to pick up your items!");
+    }
   };
   
   // Render payment screen if active
@@ -262,9 +284,24 @@ const EcommerceStore = () => {
               </div>
               
               <div className="mt-6 border-t pt-4">
-                <div className="flex justify-between items-center mb-6">
+                <div className="flex justify-between items-center mb-4">
                   <span className="font-bold text-lg">Total:</span>
                   <span className="font-bold text-xl text-taxi">€{cartTotal.toFixed(2)}</span>
+                </div>
+                
+                {/* Add ride option */}
+                <div className="mb-6 flex items-center">
+                  <input
+                    type="checkbox"
+                    id="add-ride"
+                    checked={addRide}
+                    onChange={toggleAddRide}
+                    className="mr-2 h-4 w-4 rounded border-gray-300 text-taxi focus:ring-taxi"
+                  />
+                  <label htmlFor="add-ride" className="text-sm flex items-center cursor-pointer">
+                    <Car className="h-4 w-4 mr-1 text-taxi" />
+                    Book a taxi to pick up your items after purchase
+                  </label>
                 </div>
                 
                 <Button 
