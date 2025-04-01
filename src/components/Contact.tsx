@@ -24,9 +24,24 @@ const Contact = () => {
     e.preventDefault();
     setIsSubmitting(true);
 
-    // Simulate form submission
+    // Create mailto link with form data
+    const subject = `Contact from ${contactForm.name}`;
+    const body = `
+Name: ${contactForm.name}
+Email: ${contactForm.email}
+
+Message:
+${contactForm.message}
+    `;
+    
+    const mailtoLink = `mailto:taxiamorgos@gmail.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+    
+    // Open email client
+    window.location.href = mailtoLink;
+    
+    // Show success message and reset form
     setTimeout(() => {
-      toast.success("Message sent! We'll get back to you soon.");
+      toast.success("Email client opened! Send your message directly.");
       setIsSubmitting(false);
       
       // Reset form
@@ -35,7 +50,7 @@ const Contact = () => {
         email: "",
         message: ""
       });
-    }, 1500);
+    }, 1000);
   };
 
   return (
