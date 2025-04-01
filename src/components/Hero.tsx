@@ -17,7 +17,7 @@ const Hero = () => {
       {/* Static Background Image */}
       <div className="absolute inset-0 w-full h-full z-0">
         <div className="w-full h-full bg-cover bg-center transition-all duration-1000 ease-in-out transform scale-105" style={{
-          backgroundImage: `url('/lovable-uploads/0763c994-07fe-4f8f-a6ee-b900c578381d.png')`
+          backgroundImage: `url('/lovable-uploads/653c472b-f84f-4f6e-b08b-1136e4cee1a5.jpg')`
         }} />
       </div>
       
