@@ -2,6 +2,14 @@
 import React, { useRef } from "react";
 import { Button } from "@/components/ui/button";
 import { Car, Calendar, Clock, MapPin, Star, ChevronDown } from "lucide-react";
+import {
+  Carousel,
+  CarouselContent,
+  CarouselItem,
+  CarouselNext,
+  CarouselPrevious,
+} from "@/components/ui/carousel";
+
 const Hero = () => {
   const scrollToNextSection = () => {
     const servicesSection = document.getElementById('services');
@@ -11,12 +19,34 @@ const Hero = () => {
       });
     }
   };
+
   return <section className="relative min-h-screen overflow-hidden">
-      {/* Static Background Image */}
+      {/* Background Image Carousel */}
       <div className="absolute inset-0 w-full h-full z-0">
-        <div className="w-full h-full bg-cover bg-center transition-all duration-1000 ease-in-out transform scale-105" style={{
-        backgroundImage: `url('/lovable-uploads/35266cbe-3406-4a67-839a-d5655b86bfdd.png')`
-      }} />
+        <Carousel className="w-full h-full" opts={{ loop: true }}>
+          <CarouselContent className="h-full">
+            <CarouselItem className="h-full">
+              <div className="w-full h-full bg-cover bg-center" style={{
+                backgroundImage: `url('/lovable-uploads/35266cbe-3406-4a67-839a-d5655b86bfdd.png')`
+              }} />
+            </CarouselItem>
+            <CarouselItem className="h-full">
+              <div className="w-full h-full bg-cover bg-center" style={{
+                backgroundImage: `url('/lovable-uploads/11dbc89e-f2c3-42ab-aedf-5c0cb850df9e.png')`
+              }} />
+            </CarouselItem>
+            <CarouselItem className="h-full">
+              <div className="w-full h-full bg-cover bg-center" style={{
+                backgroundImage: `url('/lovable-uploads/2cbe37fd-7a2c-4259-b98c-0ad73cc68aaa.png')`
+              }} />
+            </CarouselItem>
+            <CarouselItem className="h-full">
+              <div className="w-full h-full bg-cover bg-center" style={{
+                backgroundImage: `url('/lovable-uploads/c302b228-65b1-4f2e-b51e-3d1713f79c98.png')`
+              }} />
+            </CarouselItem>
+          </CarouselContent>
+        </Carousel>
       </div>
       
       {/* Gradient overlay */}
