@@ -28,12 +28,12 @@ const Header = () => {
       <div className="container mx-auto px-4 flex items-center justify-between">
         <div className="flex items-center space-x-2">
           <div className="flex items-center">
-            <Car className="h-8 w-8 text-taxi mr-2" />
+            <Car className="h-6 w-6 text-taxi mr-2" />
             <div className="font-bold">
-              <span className="text-xl md:text-2xl font-extrabold text-white drop-shadow-md">
+              <span className="text-lg md:text-xl font-extrabold text-white drop-shadow-md">
                 TAXI AMORGOS
               </span>
-              <span className="block text-sm md:text-base text-taxi font-semibold drop-shadow-md">
+              <span className="block text-xs md:text-sm text-taxi font-semibold drop-shadow-md">
                 Lyviakis
               </span>
             </div>
@@ -44,25 +44,25 @@ const Header = () => {
         <nav className="hidden md:flex items-center space-x-6">
           <a
             href="#services"
-            className="text-lg lg:text-xl font-medium text-white hover:text-taxi transition-colors animated-border-button drop-shadow-md"
+            className="text-base lg:text-lg font-medium text-white hover:text-taxi transition-colors animated-border-button drop-shadow-md"
           >
             Our Services
           </a>
           <a
             href="#pricing"
-            className="text-lg lg:text-xl font-medium text-white hover:text-taxi transition-colors animated-border-button drop-shadow-md"
+            className="text-base lg:text-lg font-medium text-white hover:text-taxi transition-colors animated-border-button drop-shadow-md"
           >
             Pricing
           </a>
           <a
             href="#booking"
-            className="text-lg lg:text-xl font-medium text-white hover:text-taxi transition-colors animated-border-button drop-shadow-md"
+            className="text-base lg:text-lg font-medium text-white hover:text-taxi transition-colors animated-border-button drop-shadow-md"
           >
             Book Now
           </a>
           <a
             href="#contact"
-            className="text-lg lg:text-xl font-medium text-white hover:text-taxi transition-colors animated-border-button drop-shadow-md"
+            className="text-base lg:text-lg font-medium text-white hover:text-taxi transition-colors animated-border-button drop-shadow-md"
           >
             Contact
           </a>
@@ -71,14 +71,14 @@ const Header = () => {
         <div className="hidden md:flex items-center space-x-4">
           <a
             href="tel:+306937883838"
-            className="flex items-center space-x-2 text-lg lg:text-xl font-medium text-white drop-shadow-md"
+            className="flex items-center space-x-2 text-base lg:text-lg font-medium text-white drop-shadow-md"
           >
-            <Phone className="h-5 w-5 text-taxi" />
+            <Phone className="h-4 w-4 text-taxi" />
             <span>+30 693 788 3838</span>
           </a>
           <Button
             asChild
-            className="bg-taxi hover:bg-taxi-dark text-taxi-contrast text-lg px-6 py-2 font-semibold shadow-md"
+            className="bg-taxi hover:bg-taxi-dark text-taxi-contrast text-base px-5 py-1.5 font-medium shadow-md"
           >
             <a href="#booking">Book a Taxi</a>
           </Button>
@@ -103,35 +103,35 @@ const Header = () => {
           <div className="container mx-auto px-4 py-4 flex flex-col space-y-4">
             <a
               href="#services"
-              className="text-xl font-medium py-2 border-b border-gray-700 text-white"
+              className="text-lg font-medium py-2 border-b border-gray-700 text-white"
               onClick={() => setMobileMenuOpen(false)}
             >
               Our Services
             </a>
             <a
               href="#pricing"
-              className="text-xl font-medium py-2 border-b border-gray-700 text-white"
+              className="text-lg font-medium py-2 border-b border-gray-700 text-white"
               onClick={() => setMobileMenuOpen(false)}
             >
               Pricing
             </a>
             <a
               href="#booking"
-              className="text-xl font-medium py-2 border-b border-gray-700 text-white"
+              className="text-lg font-medium py-2 border-b border-gray-700 text-white"
               onClick={() => setMobileMenuOpen(false)}
             >
               Book Now
             </a>
             <a
               href="#contact"
-              className="text-xl font-medium py-2 border-b border-gray-700 text-white"
+              className="text-lg font-medium py-2 border-b border-gray-700 text-white"
               onClick={() => setMobileMenuOpen(false)}
             >
               Contact
             </a>
             <Button
               asChild
-              className="w-full bg-taxi hover:bg-taxi-dark text-taxi-contrast text-xl font-semibold"
+              className="w-full bg-taxi hover:bg-taxi-dark text-taxi-contrast text-lg font-medium"
             >
               <a href="#booking" onClick={() => setMobileMenuOpen(false)}>
                 Book a Taxi
